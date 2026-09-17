@@ -198,8 +198,8 @@ tr:last-child td{border-bottom:none;}
 
 <meta property="og:title" content="Flashcard Quiz">
 <meta property="og:description" content="Create and take quizzes easily with Flashcard Quiz.">
-<meta property="og:image" content="https://groupdiscipline-eng.github.io/flash-cards-/preview(17).png">
-<meta property="og:url" content="https://groupdiscipline-eng.github.io/flash-cards-/">
+<meta property="og:image" content="https://groupdiscipline-eng.github.io/flash-quiz/logo.png">
+<meta property="og:url" content="https://groupdiscipline-eng.github.io/flash-quiz/">
 <meta property="og:type" content="website">
 
 <meta name="twitter:card" content="summary_large_image">
@@ -861,7 +861,7 @@ function appShell(activePath, bodyHtml){
 function bindGlobalHandlers(){
   document.querySelectorAll('[data-nav]').forEach(b=> b.addEventListener('click', ()=> go(b.dataset.nav)));
   const lo = document.getElementById('logoutBtn');
-  if(lo) lo.addEventListener('click', async ()=>{ await signOut(auth); setSession(null); toast('Logged out.'); go('/login'); });
+ if(lo) lo.addEventListener('click', async ()=>{ try{ await signOut(auth); }catch(e){ console.error('Logout error:',e); } finally{ setSession(null); go('/login'); } });
   const mt = document.getElementById('menuToggle');
   if(mt) mt.addEventListener('click', ()=> document.getElementById('sidebar').classList.toggle('open'));
   if(window.innerWidth<=820 && mt) mt.style.display='flex';
